@@ -14,4 +14,5 @@ import pickle
 import ast
 import datetime
 import matplotlib.pyplot as plt
+import matplotlib
 import scipy.stats
