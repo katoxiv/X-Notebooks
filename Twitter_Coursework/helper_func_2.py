@@ -23,10 +23,17 @@ def read_and_write(path) -> [list]:
                         list_of_field.append(tweet.get('user').get('id')) # use id only if this takes up more mem/time
                     except AttributeError:
                         list_of_field.append(None)
-                    # try:
-                    #     list_of_field.append(tweet.get('coordinates').get('coordinates'))
-                    # except AttributeError:
-                    #     list_of_field.append(None)
+                    list_of_field.append(tweet.get('timestamp_ms'))
+                    list_of_field.append(tweet.get('created_at'))
+                    list_of_field.append(tweet.get('id'))
+                    try:
+                        list_of_field.append(tweet.get('entities').get('user_mentions')[0].get('id'))
+                    except:
+                        list_of_field.append(None)
+                    try:
+                        list_of_field.append(tweet.get('coordinates').get('coordinates'))
+                    except AttributeError:
+                        list_of_field.append(None)
                     # try:
                     #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][0])
                     # except AttributeError:
@@ -43,12 +50,6 @@ def read_and_write(path) -> [list]:
                     #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][3])
                     # except AttributeError:
                     #     list_of_field.append(None)
-                    # try:
-                    #     list_of_field.append(tweet.get('entities').get('user_mentions').get('id'))
-                    # except AttributeError:
-                    #     list_of_field.append(None)
-                    list_of_field.append(tweet.get('timestamp_ms'))
-                    list_of_field.append(tweet.get('id'))
                     
                     # Add this list to the bigger list
                     list_of_tweets.append(list_of_field)

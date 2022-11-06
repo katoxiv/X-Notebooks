@@ -15,7 +15,7 @@ if __name__ == "__main__":
     
     # File to store the parsed data!
     # Remoe if already present
-    write_file_path = 'tweets_large.txt'
+    write_file_path = 'tweets_created_at.txt'
     if os.path.isfile(write_file_path):
         os.remove(write_file_path)
 
