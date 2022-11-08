@@ -21,4 +21,4 @@ import scipy.stats
 
 # Define static variables
 in_folder = "Twitter Data"
-out_file = "june_tweets.txt"
+out_file = "june_tweets_country.txt"

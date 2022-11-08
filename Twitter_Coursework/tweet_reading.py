@@ -12,7 +12,7 @@ if __name__ == "__main__":
     
     # Run the function
     parallel_lists = parallel_read(path_list)
-    
+
     # File to store the parsed data!
     # Remove if already present
     write_file_path = out_file # from utils
@@ -20,12 +20,13 @@ if __name__ == "__main__":
         os.remove(write_file_path)
 
     # Write all the tweets into a tractable text file
-    with open(write_file_path , 'a') as out_file:
+    with open(write_file_path , 'wb') as out_file:
         for list_of_tweets in parallel_lists:
             for tweet in list_of_tweets:
                 # Write the tweet followed by new-line char
-                out_file.write(','.join(map(str, tweet)))
-                out_file.write('\n')
+                write_stuff = (','.join(map(str, tweet))).encode('utf-8') # need encoding to bytes to deal with non-english chars
+                out_file.write(write_stuff)
+                out_file.write('\n'.encode('utf-8')) # need encoding to bytes to deal with non-english chars
 
     # Get end time
     finish = time.perf_counter()

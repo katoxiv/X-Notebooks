@@ -9,6 +9,14 @@ def read_and_write(path) -> list:
     # List to store fields from the tweets
     list_of_tweets = []
 
+    '''
+    experiment
+    '''
+    count = 0
+    '''
+    experiment
+    '''
+
     with zipfile.ZipFile(path , 'r') as infile:
         for file_name in infile.namelist():                
             # this goes inside the geoEurope folder
@@ -33,6 +41,10 @@ def read_and_write(path) -> list:
                     try:
                         list_of_field.append(tweet.get('coordinates').get('coordinates'))
                     except AttributeError:
+                        list_of_field.append(None)
+                    try:
+                        list_of_field.append(tweet.get('place').get('country'))
+                    except AttributeError: # something to do with EOL char for each file. Dunno why. Might investigate later!
                         list_of_field.append(None)
                     # try:
                     #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][0])
