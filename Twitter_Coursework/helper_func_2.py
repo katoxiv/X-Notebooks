@@ -1,7 +1,7 @@
 from utils import *
 
 # Reading & Writing ND JSON files
-def read_and_write(path) -> [list]:
+def read_and_write(path) -> list:
     '''
     param path (str): directory where the input json file is
     return list_of_tweets (iterable): list containing tweets as json objects with relevant data read in from the file(s) within path input
@@ -57,7 +57,7 @@ def read_and_write(path) -> [list]:
     return list_of_tweets
 
 # Parallelization Function (parallel read)
-def parallel_read(path_list) -> [list]:
+def parallel_read(path_list) -> list:
     '''
     param path_list (iterable): list of paths containing tweets
     return tweets (iterable): list containing several lists, each of which contain tweets as json objects

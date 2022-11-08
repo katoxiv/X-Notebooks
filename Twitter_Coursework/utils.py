@@ -1,3 +1,4 @@
+# Imports
 import os
 import zipfile
 import json
@@ -17,3 +18,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import seaborn as sns
 import scipy.stats
+
+# Define static variables
+in_folder = "Twitter Data"
+out_file = "june_tweets.txt"
