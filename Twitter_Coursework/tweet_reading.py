@@ -24,7 +24,7 @@ if __name__ == "__main__":
         for list_of_tweets in parallel_lists:
             for tweet in list_of_tweets:
                 # Write the tweet followed by new-line char
-                write_stuff = (','.join(map(str, tweet))).encode('utf-8') # need encoding to bytes to deal with non-english chars
+                write_stuff = ('|'.join(map(str, tweet))).encode('utf-8') # need encoding to bytes to deal with non-english chars
                 out_file.write(write_stuff)
                 out_file.write('\n'.encode('utf-8')) # need encoding to bytes to deal with non-english chars
 
