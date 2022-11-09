@@ -19,7 +19,9 @@ import matplotlib
 import seaborn as sns
 import scipy.stats
 from dask.dataframe import from_pandas
-
+from shapely.geometry import Point
+import geopandas as gpd
+from geopandas import GeoDataFrame
 
 # Define static variables
 in_folder = "Twitter Data"
