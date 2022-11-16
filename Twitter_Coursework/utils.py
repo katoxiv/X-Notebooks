@@ -17,6 +17,8 @@ import datetime
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as PolygonPatch
 from matplotlib.collections import PatchCollection
+from matplotlib.colors import LinearSegmentedColormap
+
 import matplotlib
 import seaborn as sns
 import scipy.stats
