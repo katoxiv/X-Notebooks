@@ -31,3 +31,4 @@ if __name__ == "__main__":
     # Get end time
     finish = time.perf_counter()
     print(f'Finished in {finish-start} seconds')
+    # Finished in 134.14955680000094 seconds
