@@ -9,55 +9,47 @@ def read_and_write(path) -> list:
     # List to store fields from the tweets
     list_of_tweets = []
 
-    '''
-    experiment
-    '''
-    count = 0
-    '''
-    experiment
-    '''
-
     with zipfile.ZipFile(path , 'r') as infile:
-        for file_name in infile.namelist():                
+        for geoEurope in infile.namelist():                
             # this goes inside the geoEurope folder
-            with infile.open(file_name) as f:                    
+            with infile.open(geoEurope) as f:                    
                 # iterate through each line , i.e. each tweet object
                 for line in f:                        
                     tweet = json.loads(line)
                     
                     # row-wise inclusion into a sub-list
                     list_of_field = []
-                    try:
-                        list_of_field.append(tweet.get('user').get('id')) # use id only if this takes up more mem/time
-                    except AttributeError:
-                        list_of_field.append(None)
-                    list_of_field.append(tweet.get('timestamp_ms'))
-                    list_of_field.append(tweet.get('created_at'))
+                    # try:
+                    #     list_of_field.append(tweet.get('user').get('id')) # use id only if this takes up more mem/time
+                    # except AttributeError:
+                    #     list_of_field.append(None)
+                    # list_of_field.append(tweet.get('timestamp_ms'))
+                    # list_of_field.append(tweet.get('created_at'))
                     list_of_field.append(tweet.get('id'))
-                    try:
-                        list_of_field.append(tweet.get('entities').get('user_mentions')[0].get('id'))
-                    except:
-                        list_of_field.append(None)
+                    # try:
+                    #     list_of_field.append(tweet.get('entities').get('user_mentions')[0].get('id'))
+                    # except:
+                    #     list_of_field.append(None)
                     try:
                         list_of_field.append(tweet.get('coordinates').get('coordinates'))
                     except AttributeError:
                         list_of_field.append(None)
-                    try:
-                        list_of_field.append(tweet.get('place').get('country'))
-                    except AttributeError: # something to do with EOL char for each file. Dunno why. Might investigate later!
-                        list_of_field.append(None)
                     # try:
-                    #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][0])
-                    # except AttributeError:
+                    #     list_of_field.append(tweet.get('place').get('country'))
+                    # except AttributeError: # something to do with EOL char for each file. Dunno why. Might investigate later!
                     #     list_of_field.append(None)
+                    try:
+                        list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][0])
+                    except AttributeError:
+                        list_of_field.append(None)
                     # try:
                     #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][1])
                     # except AttributeError:
                     #     list_of_field.append(None)
-                    # try:
-                    #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][2])
-                    # except AttributeError:
-                    #     list_of_field.append(None)
+                    try:
+                        list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][2])
+                    except AttributeError:
+                        list_of_field.append(None)
                     # try:
                     #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][3])
                     # except AttributeError:

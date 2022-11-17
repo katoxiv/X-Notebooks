@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as PolygonPatch
 from matplotlib.collections import PatchCollection
 from matplotlib.colors import LinearSegmentedColormap
+import mplcursors as mpc
 
 import matplotlib
 import seaborn as sns
@@ -33,4 +34,4 @@ from pprint import pprint
 
 # Define static variables
 in_folder = "Twitter Data"
-out_file = "june_tweets_country.txt"
+out_file = "june_tweets_bounding_box.txt"
