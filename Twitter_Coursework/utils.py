@@ -34,4 +34,4 @@ from pprint import pprint
 
 # Define static variables
 in_folder = "Twitter Data"
-out_file = "june_tweets_bounding_box.txt"
+out_file = "all_june_tweets.txt"
