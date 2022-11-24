@@ -6,6 +6,7 @@ def read_and_write(path) -> list:
     param path (str): directory where the input json file is
     return list_of_tweets (iterable): list containing tweets as json objects with relevant data read in from the file(s) within path input
     '''
+
     # List to store fields from the tweets
     list_of_tweets = []
 
@@ -19,57 +20,80 @@ def read_and_write(path) -> list:
                     
                     # row-wise inclusion into a sub-list
                     list_of_field = []
-                    # User  ID
-                    try:
-                        list_of_field.append(tweet.get('user').get('id')) # use id only if this takes up more mem/time
-                    except AttributeError:
-                        list_of_field.append(None)
+
+                    # # User ID
+                    # try:
+                    #     list_of_field.append(tweet.get('user').get('id')) # use id only if this takes up more mem/time
+                    # except AttributeError:
+                    #     list_of_field.append("None")
+
                     # Timestamp (UTC)
                     list_of_field.append(tweet.get('timestamp_ms'))
-                    # Created At (Local Time)
-                    list_of_field.append(tweet.get('created_at'))
+
+                    # # Created At (Local Time)
+                    # list_of_field.append(tweet.get('created_at'))
+
                     # Tweet ID
                     list_of_field.append(tweet.get('id'))
-                    # Mentions
-                    mentions = []
-                    try:
-                        # list_of_field.append(tweet.get('extended_tweet').get('entities').get('user_mentions')[0].get('id'))
-                        # If there are multiple mentions, iterate thru them
-                        for mention in tweet.get('extended_tweet').get('entities').get('user_mentions'):
-                            mentions.append(mention.get('id'))
-                        # Add all mentions as a list element to the list of field
-                        list_of_field.append(mentions)
-                    except AttributeError:
-                        try:
-                            # If there are multiple mentions, iterate thru them
-                            for mention in tweet.get('entities').get('user_mentions'):
-                                mentions.append(mention.get('id'))
-                            # Add all mentions as a list element to the list of field
-                            list_of_field.append(mentions)
-                        # If there are no mentions
-                        except:
-                            list_of_field.append(None)
-                    # Coordinates
-                    try:
-                        list_of_field.append(tweet.get('coordinates').get('coordinates'))
-                    except AttributeError:
-                        list_of_field.append(None)
+
+
+                    # # Mentions
+                    # mentions = []
+                    # try:
+                    #     # list_of_field.append(tweet.get('extended_tweet').get('entities').get('user_mentions')[0].get('id'))
+                    #     # If there are multiple mentions, iterate thru them
+                    #     for mention in tweet.get('extended_tweet').get('entities').get('user_mentions'):
+                    #         mentions.append(mention.get('id'))
+                    #     # Add all mentions as a list element to the list of field
+                    #     list_of_field.append(mentions)
+                    # except AttributeError:
+                    #     try:
+                    #         # If there are multiple mentions, iterate thru them
+                    #         for mention in tweet.get('entities').get('user_mentions'):
+                    #             mentions.append(mention.get('id'))
+                    #         # Add all mentions as a list element to the list of field
+                    #         list_of_field.append(mentions)
+                    #     # If there are no mentions
+                    #     except:
+                    #         list_of_field.append("None")
+
+                    # # Coordinates
+                    # try:
+                    #     list_of_field.append(tweet.get('coordinates').get('coordinates'))
+                    # except AttributeError:
+                    #     list_of_field.append("None")
+
                     # Country
                     try:
                         list_of_field.append(tweet.get('place').get('country'))
                     except AttributeError: # something to do with EOL char for each file. Dunno why. Might investigate later!
-                        list_of_field.append(None)
-                    # Bounding Box - Point 1
-                    try:
-                        list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][0])
-                    except AttributeError:
-                        list_of_field.append(None)
-                    # Bounding Box - Point 3
-                    try:
-                        list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][2])
-                    except AttributeError:
-                        list_of_field.append(None)
+                        list_of_field.append("None")
+
+                    # # Bounding Box - Point 1
+                    # try:
+                    #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][0])
+                    # except AttributeError:
+                    #     list_of_field.append("None")
+
+                    # # Bounding Box - Point 3
+                    # try:
+                    #     list_of_field.append(tweet.get('place').get('bounding_box').get('coordinates')[0][2])
+                    # except AttributeError:
+                    #     list_of_field.append("None")
                     
+                    # Full Text
+                    try: 
+                        text = tweet.get('extended_tweet').get('full_text')
+                        text_re = text.replace("\n"," ").replace("\r"," ").replace("\\n" , " ")
+                    except AttributeError:
+                        try:
+                            text = tweet.get('text')
+                            text_re = text.replace("\n"," ").replace("\r"," ").replace("\\n" , " ")
+                        except:
+                            text_re = "None"
+                    # list_of_field.append("dummy") # fucking magic or some shit? could instantly extract all 15million whatevevr tweets after this. I give up. Python is garbage. My coding ability is garbage.
+                    list_of_field.append(text_re)
+
                     # Add this list to the bigger list
                     list_of_tweets.append(list_of_field)
 
