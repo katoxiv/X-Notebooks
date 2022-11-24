@@ -31,10 +31,14 @@ from geopandas import GeoDataFrame
 import fiona
 from pprint import pprint
 
+from wordcloud import WordCloud
+from wordcloud import STOPWORDS
+import spacy
 
 # Define static variables
 in_folder = "Twitter Data"
 out_file = "all_june_tweets.txt"
+out_file_for_text = "all_june_2022_tweets.txt"
 
 # Some Functions
 def to_coord(df_original , coord_cols):
