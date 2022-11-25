@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     # File to store the parsed data!
     # Remove if already present
-    write_file_path = out_file # from utils
+    write_file_path = out_file_for_hashtag # from utils
     if os.path.isfile(write_file_path):
         os.remove(write_file_path)
 

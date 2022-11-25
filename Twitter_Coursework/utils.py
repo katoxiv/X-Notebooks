@@ -35,10 +35,13 @@ from wordcloud import WordCloud
 from wordcloud import STOPWORDS
 import spacy
 
+from collections import Counter
+
 # Define static variables
 in_folder = "Twitter Data"
 out_file = "all_june_tweets.txt"
-out_file_for_text = "all_june_2022_tweets.txt"
+out_file_for_text = "all_june_tweets_text.txt"
+out_file_for_hashtag = "all_june_tweets_hastags.txt"
 
 # Some Functions
 def to_coord(df_original , coord_cols):

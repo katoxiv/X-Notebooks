@@ -40,8 +40,7 @@ def read_and_write(path) -> list:
                     # # Mentions
                     # mentions = []
                     # try:
-                    #     # list_of_field.append(tweet.get('extended_tweet').get('entities').get('user_mentions')[0].get('id'))
-                    #     # If there are multiple mentions, iterate thru them
+                    # # If there are multiple mentions, iterate thru them
                     #     for mention in tweet.get('extended_tweet').get('entities').get('user_mentions'):
                     #         mentions.append(mention.get('id'))
                     #     # Add all mentions as a list element to the list of field
@@ -81,18 +80,36 @@ def read_and_write(path) -> list:
                     # except AttributeError:
                     #     list_of_field.append("None")
                     
-                    # Full Text
-                    try: 
-                        text = tweet.get('extended_tweet').get('full_text')
-                        text_re = text.replace("\n"," ").replace("\r"," ").replace("\\n" , " ")
+                    # # Full Text
+                    # try: 
+                    #     text = tweet.get('extended_tweet').get('full_text')
+                    #     text_re = text.replace("\n"," ").replace("\r"," ").replace("\\n" , " ")
+                    # except AttributeError:
+                    #     try:
+                    #         text = tweet.get('text')
+                    #         text_re = text.replace("\n"," ").replace("\r"," ").replace("\\n" , " ")
+                    #     except:
+                    #         text_re = "None"
+                    # list_of_field.append(text_re)
+
+                    # Hashtags
+                    hashtags = []
+                    # If there are multiple hashtags, iterate thru them
+                    try:
+                        for hashtag in tweet.get('extended_tweet').get('entities').get('hashtags'):
+                            hashtags.append(hashtag.get('text'))
+                        # Add all hashtags as a list element to the list of field
+                        list_of_field.append(hashtags)
                     except AttributeError:
                         try:
-                            text = tweet.get('text')
-                            text_re = text.replace("\n"," ").replace("\r"," ").replace("\\n" , " ")
+                            # If there are multiple mentions, iterate thru them
+                            for hashtag in tweet.get('entities').get('hashtags'):
+                                hashtags.append(hashtag.get('text'))
+                            # Add all hashtags as a list element to the list of field
+                            list_of_field.append(hashtags)
+                        # If there are no hashtags
                         except:
-                            text_re = "None"
-                    # list_of_field.append("dummy") # fucking magic or some shit? could instantly extract all 15million whatevevr tweets after this. I give up. Python is garbage. My coding ability is garbage.
-                    list_of_field.append(text_re)
+                            list_of_field.append("None")
 
                     # Add this list to the bigger list
                     list_of_tweets.append(list_of_field)
