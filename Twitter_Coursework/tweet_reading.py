@@ -20,13 +20,13 @@ if __name__ == "__main__":
         os.remove(write_file_path)
 
     # Write all the tweets into a tractable text file
-    with open(write_file_path , 'wb') as out_file:
+    with open(write_file_path , 'wb') as f:
         for list_of_tweets in parallel_lists:
             for tweet in list_of_tweets:
                 # Write the tweet followed by new-line char
                 write_stuff = ('|'.join(map(str, tweet))).encode('utf-8') # need encoding to bytes to deal with non-english chars
-                out_file.write(write_stuff)
-                out_file.write('\n'.encode('utf-8')) # need encoding to bytes to deal with non-english chars
+                f.write(write_stuff)
+                f.write('\n'.encode('utf-8')) # need encoding to bytes to deal with non-english chars
 
     # Get end time
     finish = time.perf_counter()
